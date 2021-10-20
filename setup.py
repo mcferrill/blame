@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    print('Setuptools not found!')
+    raise SystemExit
 
 
 setup(name='Blame',
@@ -8,7 +12,7 @@ setup(name='Blame',
       packages=['blame'],
       entry_points={
           'console_scripts': [
-              'blame=blame.blame:main',
+              'blame = blame.blame:main',
           ]
       },
       install_requires=['docopt', 'pygments', 'termcolor'])

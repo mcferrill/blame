@@ -4,7 +4,7 @@
 
 Options:
     -a AUTHOR  Only show lines from AUTHOR [default: None]
-    -t TYPES   File types to count [default: c,h]
+    -t TYPES   File types to count [default: c,h,py]
 '''
 
 import os
@@ -39,10 +39,12 @@ def show_file(path, args):
             if args.get('-a').lower() == 'bob':
                 continue
             author = colored('Micah'.ljust(7), 'green')
-        else:
+        elif 'bbaggerman' in line:
             if args.get('-a').lower() == 'micah':
                 continue
             author = colored('Bob'.ljust(7), 'yellow')
+        else:
+            author = 'Unknown'.ljust(7)
 
         code = line.split(') ')[1].rstrip()
         c = code.strip()

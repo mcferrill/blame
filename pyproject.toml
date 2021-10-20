@@ -1,6 +1,6 @@
 [project]
-name = ""
-version = ""
+name = "blame"
+version = "1.0"
 description = ""
 authors = [
     {name = "Micah Ferrill", email = "mcferrill@gmail.com"},
@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "pygments~=2.10",
     "docopt~=0.6",
+    "termcolor~=1.1",
 ]
 requires-python = ">=3.9"
 dynamic = ["classifiers"]
@@ -22,3 +23,6 @@ build-backend = "pdm.pep517.api"
 
 [tool]
 [tool.pdm]
+
+[project.scripts]
+blame = 'blame.blame:main'
