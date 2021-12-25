@@ -9,9 +9,14 @@ version = "2.10.0"
 requires_python = ">=3.5"
 summary = "Pygments is a syntax highlighting package written in Python."
 
+[[package]]
+name = "termcolor"
+version = "1.1.0"
+summary = "ANSII Color formatting for output in terminal."
+
 [metadata]
 lock_version = "3"
-content_hash = "sha256:af5953cdb0bac36edb983c806b7262df244fbd3aaf44255b097f8ac42e9fa3f0"
+content_hash = "sha256:7d41d1fe30ac32b4312284846d21f3b479eb73a85479370c76e0349c860f2aec"
 
 [metadata.files]
 "docopt 0.6.2" = [
@@ -20,4 +25,7 @@ content_hash = "sha256:af5953cdb0bac36edb983c806b7262df244fbd3aaf44255b097f8ac42
 "pygments 2.10.0" = [
     {file = "Pygments-2.10.0-py3-none-any.whl", hash = "sha256:b8e67fe6af78f492b3c4b3e2970c0624cbf08beb1e493b2c99b9fa1b67a20380"},
     {file = "Pygments-2.10.0.tar.gz", hash = "sha256:f398865f7eb6874156579fdf36bc840a03cab64d1cde9e93d68f46a425ec52c6"},
+]
+"termcolor 1.1.0" = [
+    {file = "termcolor-1.1.0.tar.gz", hash = "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"},
 ]

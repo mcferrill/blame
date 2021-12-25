@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
-'''usage: blame <path>[, <path>...] [options]
+'''usage: blame <path>... [options]
 
 Options:
-    -a AUTHOR  Only show lines from AUTHOR [default: None]
-    -t TYPES   File types to count [default: c,h]
+    -a AUTHOR  Only show lines from AUTHOR (default: None)
+    -t TYPES   File types to count [default: py,c,h]
 '''
 
+import re
 import os
 import subprocess
 
@@ -18,6 +19,16 @@ import docopt
 
 
 authors = []
+COLORS = (
+    'green',
+    'yellow',
+    'blue',
+    'magenta',
+    'cyan',
+    'white',
+    'grey',
+    'red',
+)
 
 
 def show_file(path, args):
@@ -34,15 +45,17 @@ def show_file(path, args):
 
     print(os.path.abspath(path))
 
+    authors_in_file = set()
+    lines = []
     for line in git_blame.splitlines():
-        if 'Micah Ferrill' in line:
-            if args.get('-a').lower() == 'bob':
-                continue
-            author = colored('Micah'.ljust(7), 'green')
-        else:
-            if args.get('-a').lower() == 'micah':
-                continue
-            author = colored('Bob'.ljust(7), 'yellow')
+        author_timestamp = re.search('\([\s\w\-\:\-]+\)', line)
+        author = author_timestamp[0][1:-29].strip()
+        if author not in authors:
+            authors.append(author)
+        authors_in_file.add(author)
+
+        if args.get('-a', None) and args.get('-a').lower() != author:
+            continue
 
         code = line.split(') ')[1].rstrip()
         c = code.strip()
@@ -56,11 +69,20 @@ def show_file(path, args):
             continue
         elif c == '}':
             continue
+        elif path.endswith('.py') and c.startswith('#'):
+            continue
 
         code = highlight(code,
                          guess_lexer_for_filename(path, code),
                          Terminal256Formatter(style='gruvbox-dark'))
-        print(author, code.rstrip())
+        lines.append((author, code.rstrip()))
+
+    author_width = max(len(author) for author in authors_in_file) + 2
+    for author, code in lines:
+        color = COLORS[authors.index(author)]
+        author = colored(author.ljust(author_width), color)
+        print(author, code)
+
 
 
 def main():
