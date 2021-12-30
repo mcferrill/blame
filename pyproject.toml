@@ -1,12 +1,7 @@
 [project]
 name = "blame"
-<<<<<<< HEAD
 version = "1.1"
 description = "Handy git blame wrapper"
-=======
-version = "1.0"
-description = ""
->>>>>>> origin/master
 authors = [
     {name = "Micah Ferrill", email = "mcferrill@gmail.com"},
 ]
@@ -31,6 +26,3 @@ build-backend = "pdm.pep517.api"
 
 [tool]
 [tool.pdm]
-
-[project.scripts]
-blame = 'blame.blame:main'
